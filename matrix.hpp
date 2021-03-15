@@ -14,6 +14,11 @@ public:
     matrix(int rows, int cols);
 
     /**
+     * Creates a size x size identity matrix
+     **/
+    static matrix& ident(int size);
+
+    /**
      * Outputs contents of matrix, where spaces separate entries in a row and rows are separated by a space followed by a newline.
      **/
     friend std::ostream& operator<<(std::ostream& out, matrix& mat);

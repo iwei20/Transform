@@ -3,6 +3,14 @@
 #include <stdexcept>
 matrix::matrix(int rows, int cols) : data(rows, std::vector<double>(cols)) {}
 
+matrix& ident(int size) {
+    matrix* result = new matrix(size, size);
+    for(int i = 0; i < size; ++i) {
+        (*result)[i][i] = 1;
+    }
+    return (*result);
+}
+
 std::ostream& operator<<(std::ostream& out, matrix& mat) {
     for(std::vector<double>& row : mat.data) {
         for(double item : row) {

@@ -18,7 +18,7 @@ $(deps): %.o: %.cpp
 	g++ -c $<
 
 clean:
-	rm $(name).out
-	rm $(name).ppm
-	rm *.o
+	-rm $(name).out
+	-rm $(name).ppm
+	-rm *.o
 	

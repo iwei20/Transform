@@ -51,6 +51,7 @@ void parser::parse(std::istream& in) {
             std::string filename;
             std::ofstream fout(filename);
             fout << _s;
+            fout.close();
         }
     }
 }

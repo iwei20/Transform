@@ -1,11 +1,8 @@
 #include "parser.hpp"
 
-#include <iostream>
 #include <istream>
 #include <string>
-#include <functional>
 #include <fstream>
-#include <memory>
 
 void parser::parse(screen& s, std::istream& in) {
     std::string line;

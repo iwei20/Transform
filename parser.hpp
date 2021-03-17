@@ -4,7 +4,6 @@
 #include "edge_matrix.hpp"
 #include "transform_manager.hpp"
 #include <istream>
-#include <memory>
 class parser {
     private:
         edge_matrix _e;

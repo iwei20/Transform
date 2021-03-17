@@ -2,7 +2,6 @@
 
 #include "edge_matrix.hpp"
 #include <ostream>
-#include <array>
 #include <tuple>
 
 class screen {

@@ -1,7 +1,7 @@
 #include "transform_manager.hpp"
 
 #include <cmath>
-transform_manager::transform_manager() : m{4, 4} {}
+transform_manager::transform_manager() : m{matrix::ident(4)} {}
 
 const double convert_rad = M_PI / 180;
 void transform_manager::translate(double x_units, double y_units, double z_units) {
@@ -52,4 +52,8 @@ void transform_manager::zRot(double degrees) {
 
 matrix& transform_manager::get_matrix() {
     return m;
+}
+
+void transform_manager::reset() {
+    m = matrix::ident(4);
 }

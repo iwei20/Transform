@@ -12,4 +12,5 @@ class transform_manager {
         void yRot(double degrees);
         void zRot(double degrees);
         matrix& get_matrix();
+        void reset();
 };

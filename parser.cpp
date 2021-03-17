@@ -1,5 +1,6 @@
 #include "parser.hpp"
 
+#include <iostream>
 #include <istream>
 #include <string>
 #include <functional>
@@ -34,10 +35,13 @@ void parser::parse(std::istream& in) {
             switch(axis) {
                 case 'x':
                     _t.xRot(degrees);
+                    break;
                 case 'y':
                     _t.yRot(degrees);
+                    break;
                 case 'z':
                     _t.zRot(degrees);
+                    break;
             }
         }
         if(line == "apply") {
@@ -49,6 +53,7 @@ void parser::parse(std::istream& in) {
         }
         if(line == "save") {
             std::string filename;
+            in >> filename;
             std::ofstream fout(filename);
             fout << _s;
             fout.close();

@@ -1,5 +1,5 @@
 name = main
-deps = matrix.o screen.o edge_matrix.o
+deps = matrix.o screen.o edge_matrix.o transform_manager.o
 
 all: run
 

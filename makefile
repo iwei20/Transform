@@ -20,6 +20,6 @@ $(deps): %.o: %.cpp
 
 clean:
 	-rm $(name).out
-	-rm $(name).ppm
+	-rm $(picture).ppm
 	-rm *.o
 	

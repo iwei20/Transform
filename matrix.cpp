@@ -3,7 +3,7 @@
 #include <stdexcept>
 matrix::matrix(int rows, int cols) : data(rows, std::vector<double>(cols)) {}
 
-matrix& ident(int size) {
+matrix& matrix::ident(int size) {
     matrix* result = new matrix(size, size);
     for(int i = 0; i < size; ++i) {
         (*result)[i][i] = 1;

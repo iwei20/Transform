@@ -14,14 +14,8 @@ $(name).out: $(name).o $(deps)
 $(name).o: $(name).cpp
 	g++ -c $(name).cpp
 
-screen.o: screen.cpp screen.hpp
-	g++ -c screen.cpp
-
-edge_matrix.o: edge_matrix.cpp edge_matrix.hpp
-	g++ -c edge_matrix.cpp
-
-matrix.o: matrix.cpp matrix.hpp
-	g++ -c matrix.cpp
+$(deps): %.o: %.cpp
+	g++ -c $<
 
 clean:
 	rm $(name).out

@@ -5,9 +5,9 @@
 #include <string>
 #include <functional>
 #include <fstream>
-parser::parser(screen& s) : _s{s} {}
+#include <memory>
 
-void parser::parse(std::istream& in) {
+void parser::parse(screen& s, std::istream& in) {
     std::string line;
     while(in >> line) {
         if(line == "line") {
@@ -48,14 +48,14 @@ void parser::parse(std::istream& in) {
             _e = _t.get_matrix() * _e;
         }
         if(line == "display") {
-            _s.clear();
-            _s.drawMatrix(_e, {255, 255, 255});
+            s.clear();
+            s.drawMatrix(_e, {255, 255, 255});
         }
         if(line == "save") {
             std::string filename;
             in >> filename;
             std::ofstream fout(filename);
-            fout << _s;
+            fout << s;
             fout.close();
         }
     }

@@ -4,12 +4,14 @@
 #include "edge_matrix.hpp"
 #include "transform_manager.hpp"
 #include <istream>
+#include <memory>
 class parser {
     private:
-        screen _s;
         edge_matrix _e;
         transform_manager _t;
     public:
-        parser(screen& s);
-        void parse(std::istream& in);
+        /**
+         * Reads through and performs all operations from a stream and performs them on screen s.
+         **/
+        void parse(screen& s, std::istream& in);
 };

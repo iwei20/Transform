@@ -5,24 +5,24 @@
 #include <array>
 #include <tuple>
 
-template<size_t rows, size_t cols>
 class screen {
     private:
-        std::array<std::array<std::tuple<short, short, short>, cols>, rows> colorData; 
+        std::vector<std::vector<std::tuple<short, short, short>>> colorData; 
     public:
+        screen(int width, int height) : colorData(height, std::vector<std::tuple<short, short, short>>(width)) {}
         /**
          * Prints out contents of screen in a PPM ASCII format.
          **/
         friend std::ostream& operator<<(std::ostream& out, screen& s) {
             out << "P3\n";
-            out << rows << " " << cols << "\n";
+            out << s.colorData.size() << " " << s.colorData[0].size() << "\n";
             out << 255 << "\n";
 
-            for(int i = 0; i < rows; ++i) {
-                for(int j = 0; j < cols; ++j) {
+            for(int i = 0; i < s.colorData.size(); ++i) {
+                for(int j = 0; j < s.colorData[i].size(); ++j) {
                     short red, green, blue;
                     std::tie(red, green, blue) = s.colorData[i][j];
-                    out << red << " " << green << " " << blue << (j == cols - 1 ? "\n" : " ");
+                    out << red << " " << green << " " << blue << (j == s.colorData[i].size() - 1 ? "\n" : " ");
                 }
             }
             return out;
@@ -31,7 +31,7 @@ class screen {
         /**
          * Reference to a point
          **/
-        std::array<std::tuple<short, short, short>, cols>& operator[](int index) {
+        std::vector<std::tuple<short, short, short>>& operator[](int index) {
             return colorData[index];
         }
 
@@ -53,8 +53,8 @@ class screen {
          * Fills the screen with black
          **/
         void clear() {
-            for(int i = 0; i < rows; ++i) {
-                for(int j = 0; j < cols; ++j) {
+            for(int i = 0; i < colorData.size(); ++i) {
+                for(int j = 0; j < colorData[i].size(); ++j) {
                     colorData[i][j] = {0, 0, 0};
                 }
             }

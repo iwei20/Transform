@@ -13,7 +13,7 @@ void rect(edge_matrix& e, int x, int y, int w, int h) {
 
 int main() {
     std::ofstream fout("main.ppm");
-    screen<512, 512> s;
+    screen s(512, 512);
     edge_matrix e;
     for(double i = 511; i >= 1; i /= 1.2) {
         e.add_edge({0, 0, 0}, {511, i, 0});

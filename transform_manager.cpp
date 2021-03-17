@@ -6,9 +6,9 @@ transform_manager::transform_manager() : m{matrix::ident(4)} {}
 const double convert_rad = M_PI / 180;
 void transform_manager::translate(double x_units, double y_units, double z_units) {
     matrix to_mult = matrix::ident(4);
-    to_mult[3][0] = x_units;
-    to_mult[3][1] = y_units;
-    to_mult[3][2] = z_units;
+    to_mult[0][3] = x_units;
+    to_mult[1][3] = y_units;
+    to_mult[2][3] = z_units;
     m = to_mult * m;
 }
 

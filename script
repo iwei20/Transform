@@ -47,10 +47,5 @@ rotate
 y 20
 apply
 display
-ident
-move
-0 -100 0
-apply
-display
 save
 pic.ppm

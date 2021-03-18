@@ -27,10 +27,16 @@ std::vector<std::tuple<short, short, short>>& screen::operator[](int index) {
 }
 
 std::tuple<short, short, short> screen::get(int row, int col) {
+    if(row < 0 || row >= colorData.size() || col < 0 || col >= colorData[0].size()) {
+        throw std::invalid_argument("Requested screen element out of bounds");
+    }
     return colorData[row][col];
 }
 
 void screen::set(int row, int col, std::tuple<short, short, short> new_color) {
+    if(row < 0 || row >= colorData.size() || col < 0 || col >= colorData[0].size()) {
+        throw std::invalid_argument("Requested screen element out of bounds");
+    }
     colorData[row][col] = new_color;
 }
 

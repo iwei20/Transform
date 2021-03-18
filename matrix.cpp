@@ -3,7 +3,22 @@
 #include <stdexcept>
 matrix::matrix(int rows, int cols) : data(rows, std::vector<double>(cols)) {}
 
+matrix::matrix(std::vector<std::vector<double>>& vector_2d) : data(vector_2d) {
+    // Check if data has uniform column size
+    if(data.size() > 1) {
+        int col_size = data[0].size();
+        for(int i = 1; i < data.size(); ++i) {
+            if(data[i].size() != col_size) {
+                throw std::invalid_argument("Input 2D vector does not have uniform column size");
+            }
+        }
+    }
+}
+
 matrix& matrix::ident(int size) {
+    if(size < 0) {
+        throw std::invalid_argument("Negative identity matrix size");
+    }
     matrix* result = new matrix(size, size);
     for(int i = 0; i < size; ++i) {
         (*result)[i][i] = 1;
@@ -43,10 +58,16 @@ std::vector<double>& matrix::operator[](int index) {
 }
 
 double matrix::get(int row, int col) {
+    if(row < 0 || row >= data.size() || col < 0 || col >= data[0].size()) {
+        throw std::invalid_argument("Requested matrix element out of bounds");
+    }
     return data[row][col];
 }
 
 void matrix::set(int row, int col, double num) {
+    if(row < 0 || row >= data.size() || col < 0 || col >= data[0].size()) {
+        throw std::invalid_argument("Requested matrix element out of bounds");
+    }
     data[row][col] = num;
 }
 

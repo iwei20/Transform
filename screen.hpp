@@ -6,7 +6,8 @@
 
 class screen {
     private:
-        std::vector<std::vector<std::tuple<short, short, short>>> colorData; 
+        std::vector<std::vector<std::tuple<short, short, short>>> colorData;
+        bool outbounds(int x, int y);
     public:
         screen(int width, int height);
         /**

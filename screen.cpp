@@ -1,6 +1,11 @@
 #include "screen.hpp"
 
+#include <iostream>
 screen::screen(int width, int height) : colorData(height, std::vector<std::tuple<short, short, short>>(width)) {}
+
+bool screen::outbounds(int x, int y) {
+    return x < 0 || x >= colorData[0].size() || y < 0 || y >= colorData.size();
+}
 
 std::ostream& operator<<(std::ostream& out, screen& s) {
     out << "P3\n";
@@ -45,7 +50,8 @@ void screen::drawMatrix(edge_matrix& edges, std::tuple<short, short, short> colo
 
 void screen::drawLine(std::pair<int, int> a, std::pair<int, int> b, std::tuple<short, short, short> color) {
     int dx = (b.first - a.first), dy = (b.second - a.second);
-    
+    bool drawnOff = false;
+
     // Gentler slopes
     if(abs(dx) >= abs(dy)) {
         
@@ -64,7 +70,14 @@ void screen::drawLine(std::pair<int, int> a, std::pair<int, int> b, std::tuple<s
         if(dy >= 0) {
             int midCompare = 2 * dy - dx; // 2A + B
             while(x <= max_x) {
-                colorData[y][x] = color;
+                if(outbounds(x, y)) {
+                    if(!drawnOff) {
+                        std::cout << "Warning: drawing off screen\n";
+                        drawnOff = true;
+                    } 
+                } else {
+                    colorData[y][x] = color;
+                }
                 if(midCompare >= 0) {
                     ++y;
                     midCompare -= 2 * dx;
@@ -76,7 +89,14 @@ void screen::drawLine(std::pair<int, int> a, std::pair<int, int> b, std::tuple<s
         } else {
             int midCompare = 2 * dy + dx; // 2A - B
             while(x <= max_x) {
-                colorData[y][x] = color;
+                if(outbounds(x, y)) {
+                    if(!drawnOff) {
+                        std::cout << "Warning: drawing off screen\n";
+                        drawnOff = true;
+                    } 
+                } else {
+                    colorData[y][x] = color;
+                }
                 if(midCompare <= 0) {
                     --y;
                     midCompare += 2 * dx;
@@ -104,7 +124,14 @@ void screen::drawLine(std::pair<int, int> a, std::pair<int, int> b, std::tuple<s
         if(dx >= 0) {
             int midCompare = dy - 2 * dx; // A + 2B
             while(y <= max_y) {
-                colorData[y][x] = color;
+                if(outbounds(x, y)) {
+                    if(!drawnOff) {
+                        std::cout << "Warning: drawing off screen\n";
+                        drawnOff = true;
+                    } 
+                } else {
+                    colorData[y][x] = color;
+                }
                 if(midCompare <= 0) {
                     ++x;
                     midCompare += 2 * dy;
@@ -116,7 +143,14 @@ void screen::drawLine(std::pair<int, int> a, std::pair<int, int> b, std::tuple<s
         } else {
             int midCompare = dy + 2 * dx; // A - 2B
             while(y <= max_y) {
-                colorData[y][x] = color;
+                if(outbounds(x, y)) {
+                    if(!drawnOff) {
+                        std::cout << "Warning: drawing off screen\n";
+                        drawnOff = true;
+                    } 
+                } else {
+                    colorData[y][x] = color;
+                }
                 if(midCompare >= 0) {
                     --x;
                     midCompare -= 2 * dy;

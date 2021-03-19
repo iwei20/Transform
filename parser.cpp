@@ -7,6 +7,10 @@
 void parser::parse(screen& s, std::istream& in) {
     std::string line;
     while(in >> line) {
+        if(line[0] == '#') {
+            continue;
+        }
+        
         if(line == "line") {
             double x1, y1, z1, x2, y2, z2;
             in >> x1 >> y1 >> z1 >> x2 >> y2 >> z2;
